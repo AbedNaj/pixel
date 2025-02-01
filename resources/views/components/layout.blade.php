@@ -12,14 +12,29 @@
     <div class="px-10">
 
         <nav class="flex justify-between items-center py-10 border-b border-white/10 ">
-            <div><a href=""><img src="{{ Vite::asset('resources/images/logo.svg') }}" alt="icon"></a></div>
+            <div><a href="/"><img src="{{ Vite::asset('resources/images/logo.svg') }}" alt="icon"></a></div>
             <div class="space-x-6 font-bold">
                 <a href="">Jobs</a>
                 <a href="">Carrers</a>
                 <a href="">Salaries</a>
                 <a href="">Companies</a>
             </div>
-            <div><a href="">Post A Job</a></div>
+            @auth
+            <div><a href="/jobs/create">Post A Job</a>
+                <form method="POST" action="/logout">
+                    @csrf
+                    @method('DELETE')
+                    <button>logout</button>
+                </form>
+            </div>
+            @endauth
+
+            @guest
+            <div>
+                <a href="/register">Sign Up</a>
+                <a href="/login">Log In</a>
+            </div>
+            @endguest
         </nav>
 
         <main>
